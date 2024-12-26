@@ -7,9 +7,11 @@ import {
   ScrollView,
   TouchableOpacity,
   Animated,
+  SafeAreaView,
 } from "react-native";
 import { useCart } from "../context/CartContext";
 import { useNavigation } from "@react-navigation/native";
+import styles from "../styles/restaurant";
 
 // Helper function to format price
 const formatPrice = (price) => {
@@ -24,7 +26,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "pp1",
         name: "Margherita Pizza",
-        price: 4,
+        price: 3.95,
         description: "Fresh tomatoes, mozzarella, basil, olive oil",
         image:
           "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=500&auto=format",
@@ -32,7 +34,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "pp2",
         name: "Chicken Supreme",
-        price: 4.5,
+        price: 4.75,
         description: "Grilled halal chicken, extra cheese, Italian herbs",
         image:
           "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format",
@@ -40,7 +42,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "pp3",
         name: "BBQ Chicken Pizza",
-        price: 5.0,
+        price: 5.25,
         description: "Halal chicken, red onions, BBQ sauce",
         image:
           "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format",
@@ -52,7 +54,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "ppa1",
         name: "Fettuccine Alfredo",
-        price: 4.25,
+        price: 4.35,
         description: "Creamy parmesan sauce, fresh pasta",
         image:
           "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=500&auto=format",
@@ -60,7 +62,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "ppa2",
         name: "Seafood Linguine",
-        price: 5.75,
+        price: 5.95,
         description: "Fresh shrimp, mussels, calamari in herb sauce",
         image:
           "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=500&auto=format",
@@ -68,7 +70,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "ppa3",
         name: "Chicken Penne",
-        price: 4.5,
+        price: 4.65,
         description: "Halal chicken, spicy tomato sauce, garlic, fresh basil",
         image:
           "https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=500&auto=format",
@@ -80,7 +82,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "bi1",
         name: "Chicken Lasagna",
-        price: 5.0,
+        price: 5.15,
         description: "Layered pasta, halal chicken, ricotta cheese",
         image:
           "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=500&auto=format",
@@ -88,7 +90,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "bi2",
         name: "Eggplant Parmesan",
-        price: 4.5,
+        price: 4.85,
         description: "Breaded eggplant, marinara, melted mozzarella",
         image:
           "https://images.unsplash.com/photo-1629115916087-31ca04368cde?w=500&auto=format",
@@ -96,7 +98,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "bi3",
         name: "Gnocchi Pesto",
-        price: 5.0,
+        price: 5.45,
         description: "Potato gnocchi, basil pesto, pine nuts",
         image:
           "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=500&auto=format",
@@ -108,7 +110,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "bb1",
         name: "Classic Barn Burger",
-        price: 3.5,
+        price: 3.65,
         description: "Halal beef patty, lettuce, tomato, special sauce",
         image:
           "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format",
@@ -116,7 +118,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "bb2",
         name: "Chicken Deluxe",
-        price: 4.25,
+        price: 4.15,
         description: "Grilled halal chicken, cheddar, caramelized onions",
         image:
           "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=500&auto=format",
@@ -124,7 +126,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "bb3",
         name: "Mushroom Swiss",
-        price: 4.0,
+        price: 4.45,
         description: "Halal beef patty, mushrooms, Swiss cheese, garlic aioli",
         image:
           "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=500&auto=format",
@@ -136,7 +138,7 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "wt1",
         name: "Classic Buffalo Wings",
-        price: 4,
+        price: 4.35,
         description: "10 pieces halal chicken wings, choice of sauce",
         image:
           "https://images.unsplash.com/photo-1608039755401-742074f0548d?w=500&auto=format",
@@ -144,18 +146,18 @@ const getRestaurantMenu = (restaurantId) => {
       {
         id: "wt2",
         name: "Grilled Wings Combo",
-        price: 4.5,
+        price: 4.95,
         description: "12 grilled halal wings, fries, coleslaw",
         image:
           "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=500&auto=format",
       },
       {
         id: "wt3",
-        name: "Wing Party Pack",
-        price: 7.5,
-        description: "25 halal wings, multiple sauces, extra dips",
+        name: "Boneless Wings",
+        price: 4.55,
+        description: "Crispy boneless wings, ranch dip",
         image:
-          "https://images.unsplash.com/photo-1614398751058-eb2e0bf63e53?w=500&auto=format",
+          "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=500&auto=format",
       },
     ],
 
@@ -571,54 +573,69 @@ export default function RestaurantScreen({ route }) {
         </View>
       </View>
 
-      {/* Menu Section */}
-      <ScrollView
-        style={styles.menuContainer}
-        showsVerticalScrollIndicator={false}
-      >
-        <Text style={styles.menuTitle}>Menu</Text>
-        {restaurantMenu.map((item) => (
-          <View key={item.id} style={styles.menuItem}>
-            <View style={styles.menuItemContent}>
-              <View style={styles.menuItemInfo}>
-                <Text style={styles.menuItemName}>{item.name}</Text>
-                <Text style={styles.menuItemDescription}>
-                  {item.description}
-                </Text>
-                <Text style={styles.menuItemPrice}>
-                  {formatPrice(item.price)} KD
-                </Text>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          style={styles.menuContainer}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 80 }}
+        >
+          <Text style={styles.menuTitle}>Menu</Text>
+          {restaurantMenu.map((item) => (
+            <View key={item.id} style={styles.menuItem}>
+              <View style={styles.menuItemContent}>
+                <View style={styles.menuItemInfo}>
+                  <Text style={styles.menuItemName}>{item.name}</Text>
+                  <Text style={styles.menuItemDescription}>
+                    {item.description}
+                  </Text>
+                  <Text style={styles.menuItemPrice}>
+                    {formatPrice(item.price)} KD
+                  </Text>
+                </View>
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.menuItemImage}
+                />
               </View>
-              <Image
-                source={{ uri: item.image }}
-                style={styles.menuItemImage}
-              />
-            </View>
-            <View style={styles.addToCartContainer}>
-              {getItemQuantity(item.id) > 0 ? (
-                <View style={styles.quantityControls}>
-                  <TouchableOpacity
-                    style={styles.quantityButton}
-                    onPress={() => {
-                      if (getItemQuantity(item.id) === 1) {
-                        removeFromCart(item);
-                      } else {
+              <View style={styles.addToCartContainer}>
+                {getItemQuantity(item.id) > 0 ? (
+                  <View style={styles.quantityControls}>
+                    <TouchableOpacity
+                      style={styles.quantityButton}
+                      onPress={() => {
+                        if (getItemQuantity(item.id) === 1) {
+                          removeFromCart(item);
+                        } else {
+                          addToCart({
+                            ...item,
+                            quantity: -1,
+                            restaurantId: restaurant.id,
+                            restaurantName: restaurant.name,
+                          });
+                        }
+                      }}
+                    >
+                      <Text style={styles.quantityButtonText}>-</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.quantityText}>
+                      {getItemQuantity(item.id)}
+                    </Text>
+                    <TouchableOpacity
+                      style={styles.quantityButton}
+                      onPress={() =>
                         addToCart({
                           ...item,
-                          quantity: -1,
                           restaurantId: restaurant.id,
                           restaurantName: restaurant.name,
-                        });
+                        })
                       }
-                    }}
-                  >
-                    <Text style={styles.quantityButtonText}>-</Text>
-                  </TouchableOpacity>
-                  <Text style={styles.quantityText}>
-                    {getItemQuantity(item.id)}
-                  </Text>
+                    >
+                      <Text style={styles.quantityButtonText}>+</Text>
+                    </TouchableOpacity>
+                  </View>
+                ) : (
                   <TouchableOpacity
-                    style={styles.quantityButton}
+                    style={styles.addButton}
                     onPress={() =>
                       addToCart({
                         ...item,
@@ -627,27 +644,14 @@ export default function RestaurantScreen({ route }) {
                       })
                     }
                   >
-                    <Text style={styles.quantityButtonText}>+</Text>
+                    <Text style={styles.addButtonText}>Add to Cart</Text>
                   </TouchableOpacity>
-                </View>
-              ) : (
-                <TouchableOpacity
-                  style={styles.addButton}
-                  onPress={() =>
-                    addToCart({
-                      ...item,
-                      restaurantId: restaurant.id,
-                      restaurantName: restaurant.name,
-                    })
-                  }
-                >
-                  <Text style={styles.addButtonText}>Add to Cart</Text>
-                </TouchableOpacity>
-              )}
+                )}
+              </View>
             </View>
-          </View>
-        ))}
-      </ScrollView>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
 
       {/* Floating Cart Button */}
       {getTotalCartItems() > 0 && (
@@ -663,195 +667,3 @@ export default function RestaurantScreen({ route }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f8f8f8",
-  },
-  heroSection: {
-    height: 300,
-    position: "relative",
-  },
-  heroImage: {
-    width: "100%",
-    height: "100%",
-  },
-  heroOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.3)",
-  },
-  restaurantInfoOverlay: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: 20,
-    backgroundColor: "rgba(255,255,255,0.95)",
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-  },
-  restaurantName: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: "#333",
-    marginBottom: 8,
-  },
-  restaurantDetails: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  cuisineTag: {
-    backgroundColor: "#f0f8f6",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    marginRight: 12,
-  },
-  cuisineText: {
-    color: "#00a082",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  ratingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  rating: {
-    fontSize: 14,
-    color: "#666",
-    fontWeight: "500",
-  },
-  dotSeparator: {
-    marginHorizontal: 8,
-    color: "#666",
-  },
-  deliveryTime: {
-    fontSize: 14,
-    color: "#666",
-  },
-  deliveryFee: {
-    fontSize: 14,
-    color: "#666",
-    marginBottom: 4,
-  },
-  minOrder: {
-    fontSize: 14,
-    color: "#00a082",
-    fontWeight: "600",
-  },
-  menuContainer: {
-    flex: 1,
-    padding: 20,
-  },
-  menuTitle: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#333",
-    marginBottom: 16,
-  },
-  menuItem: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  menuItemContent: {
-    flexDirection: "row",
-    marginBottom: 12,
-  },
-  menuItemInfo: {
-    flex: 1,
-    marginRight: 16,
-  },
-  menuItemImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 12,
-  },
-  menuItemName: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#333",
-    marginBottom: 6,
-  },
-  menuItemDescription: {
-    fontSize: 14,
-    color: "#666",
-    marginBottom: 8,
-    lineHeight: 20,
-  },
-  menuItemPrice: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#00a082",
-  },
-  quantityControls: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#f8f8f8",
-    borderRadius: 25,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-  },
-  quantityButton: {
-    width: 32,
-    height: 32,
-    backgroundColor: "#00a082",
-    borderRadius: 16,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  quantityButtonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  quantityText: {
-    marginHorizontal: 16,
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#333",
-  },
-  addButton: {
-    backgroundColor: "#00a082",
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 25,
-    alignItems: "center",
-  },
-  addButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  floatingCartButton: {
-    position: "absolute",
-    bottom: 20,
-    left: 20,
-    right: 20,
-    backgroundColor: "#00a082",
-    padding: 16,
-    borderRadius: 12,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  cartButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "700",
-  },
-});

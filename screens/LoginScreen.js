@@ -4,14 +4,13 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
 } from "react-native";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
+import styles from "../styles/auth";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -101,114 +100,3 @@ export default function LoginScreen({ navigation }) {
     </KeyboardAvoidingView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: "center",
-    padding: 20,
-  },
-  headerContainer: {
-    alignItems: "center",
-    marginBottom: 40,
-  },
-  logo: {
-    width: 120,
-    height: 120,
-    marginBottom: 20,
-  },
-  welcomeText: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#00a082",
-    marginBottom: 10,
-  },
-  subtitleText: {
-    fontSize: 16,
-    color: "#666",
-    textAlign: "center",
-    paddingHorizontal: 20,
-  },
-  formContainer: {
-    width: "100%",
-    marginBottom: 30,
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  inputLabel: {
-    fontSize: 14,
-    color: "#333",
-    marginBottom: 8,
-    fontWeight: "500",
-  },
-  input: {
-    backgroundColor: "#f8f8f8",
-    padding: 15,
-    borderRadius: 12,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#eee",
-  },
-  loginButton: {
-    backgroundColor: "#00a082",
-    padding: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    marginTop: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  loginButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  forgotPasswordButton: {
-    alignItems: "center",
-    marginTop: 15,
-  },
-  forgotPasswordText: {
-    color: "#00a082",
-    fontSize: 14,
-    fontWeight: "500",
-  },
-  signupContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  signupText: {
-    color: "#666",
-    fontSize: 14,
-  },
-  signupLink: {
-    color: "#00a082",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  guestLoginButton: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: "#00a082",
-  },
-  guestLoginText: {
-    color: "#00a082",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-});
